@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 
 
 class PromptGenerator
@@ -12,11 +13,15 @@ class PromptGenerator
      public PromptGenerator()
      {
         //pulling the prompts from the txt file in same folder
-        string filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "prompts.txt");
-        string[] lines = File.ReadAllLines(filePath);
-        _prompts.AddRange(lines);
+        string filename = "prompts.txt";
+        string[] lines = System.IO.File.ReadAllLines(filename);
+        foreach (string line in lines)
+        {
+            _prompts.Add(line);
+        }
+        
      }
-    public string GetRandomPrompt()
+    public string getRandomPrompt()
     {
         Random random = new Random();
         int index = random.Next(0, _prompts.Count);
