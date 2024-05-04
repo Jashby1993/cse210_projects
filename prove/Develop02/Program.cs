@@ -27,7 +27,7 @@ class Program
 
             return menuChoice;
         }
-
+        //if I add more choices, make sure to change the != menu choice to whatever is last. actually... I should make that a list, then if menuChoice < Count(menuChoices)...
         while (menuChoice != 5)
         {
             //new entry
@@ -47,14 +47,18 @@ class Program
             //save to file
             else if (menuChoice == 3)
             {
-
+                Journal myJournal = new Journal();
+                myJournal.saveToFile();
+                menuChoice = DisplayMenu();
             }
             //load file
             else if (menuChoice == 4)
             {
-
+                Journal myJournal = new Journal();
+                myJournal.loadFile();
+                menuChoice = DisplayMenu();
             }
-            //quit
+            //quit (didn't set to 5, because if I add more choices later, the last one will always be the "else")
             else
             {
 
