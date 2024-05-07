@@ -22,10 +22,13 @@ class Entry
     
     }
 
+     public override string ToString()
+    {
+        return $"Prompt: {_initialPrompt}\nEntry: {_entryText}\n\nDate: {_dateTime}";
+    }
+
     public void DisplayEntry()
     {
-        Console.WriteLine(_initialPrompt);
-        Console.WriteLine(_entryText);
-        Console.WriteLine(_dateTime);
+        Console.WriteLine(this.ToString());
     }
 }

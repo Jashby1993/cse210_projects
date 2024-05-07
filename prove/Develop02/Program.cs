@@ -16,7 +16,7 @@ class Program
         static int DisplayMenu()
         {
             
-            Console.WriteLine("What would you like to do? Please enter the number of your choice: ")
+            Console.WriteLine("What would you like to do? Please enter the number of your choice: ");
             Console.WriteLine("1. Get a prompt and enter a new journal entry.");
             Console.WriteLine("2. Display the entire journal.");
             Console.WriteLine("3. Save journal to a file.");
