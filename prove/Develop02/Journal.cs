@@ -5,7 +5,22 @@ using System.IO;
 class Journal
 {
     public List<Entry> Entries = new List<Entry>();
+    int menuChoice;
 
+    
+    public int DisplayMenu()
+    {
+        string userSelection;
+        Console.WriteLine("What would you like to do? Please enter the number of your choice:");
+        Console.WriteLine("1. Get a prompt and enter a new journal entry.");
+        Console.WriteLine("2. Display the entire journal.");
+        Console.WriteLine("3. Save journal to a file.");
+        Console.WriteLine("4. Load a journal from a file.");
+        Console.WriteLine("5. Quit");
+        userSelection = Console.ReadLine();
+        menuChoice = int.Parse(userSelection);
+        return menuChoice;
+    }
     public void AddEntry()
     {
         Entry newEntry = new Entry();
