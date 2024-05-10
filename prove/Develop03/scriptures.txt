@@ -7,23 +7,5 @@ Matthew 5:14-16|"You are the light of the world. A town built on a hill cannot b
 Philippians 4:6-7|"Do not be anxious about anything, but in every situation, by prayer and petition, with thanksgiving, present your requests to God. And the peace of God, which transcends all understanding, will guard your hearts and your minds in Christ Jesus."
 1 Corinthians 13:4-7|"Love is patient, love is kind. It does not envy, it does not boast, it is not proud. It does not dishonor others, it is not self-seeking, it is not easily angered, it keeps no record of wrongs. Love does not delight in evil but rejoices with the truth. It always protects, always trusts, always hopes, always perseveres."
 
-reference format text until space before an integer, integer until : , integer  OR
-reference format text until space before an integer, integer until : , integer , - , integer    if more than one verse
-
-public static List<Scripture> scriptureMastery = new List<Scripture>();
-string filename = "sciptures.txt";
-
-string[] lines = System.IO.ReadAllLines(filename);
-foreach (string line in lines)
-{
-    string cleanLine = line.Replace(" ","");
-
-    //part[0] reference
-    //part[1] text
-    string[] = parts cleanLine.Split("|");
-    string roughReference = parts[0];
-    string roughText = parts[1];
-}
 
 
-return scriptureMastery;

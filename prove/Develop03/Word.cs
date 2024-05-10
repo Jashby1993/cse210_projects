@@ -5,10 +5,10 @@ class Word
 private string _text;
 private bool _isHidden;
 
-public Word(string text, bool isHidden)
+public Word(string text, bool isHidden = false )
 {
     this._text = text;
-    this._isHidden = isHidden;
+        
 
 }
 public void Hide()
