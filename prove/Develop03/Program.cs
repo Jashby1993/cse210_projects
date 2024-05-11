@@ -13,14 +13,13 @@ class Program
         (string roughReference, string roughText) = parseScripture(theGoodBook, randomScripture);
         Reference myReference = new Reference(roughReference);
         string[] wordsArray = roughText.Split(' ');
-        List<Word> wordList = new List<Word>();
+        List<Word> scriptureText = new List<Word>();
         foreach (string wordText in wordsArray)
         {
-            Word word = new Word(wordText);
-            wordList.Add(word);
-            Scripture myScripture = new Scripture(myReference,roughText);
+            Word Word = new Word(wordText);
+            scriptureText.Add(Word);          
         }
-
+        Scripture focusScripture = new Scripture(myReference,scriptureText);
 
         
         
