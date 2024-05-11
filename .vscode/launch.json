@@ -154,7 +154,7 @@
             "program": "${workspaceFolder}/prove/Develop03/bin/Debug/net8.0/Develop03.dll",
             "args": [],
             "cwd": "${workspaceFolder}/prove/Develop03",
-            "console": "integratedTerminal",
+            "console": "internalConsole",
             "internalConsoleOptions": "neverOpen",
             "stopAtEntry": false
         },

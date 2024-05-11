@@ -3,15 +3,23 @@ using System;
 class Word
 {
 private string _text;
-private bool _isHidden;
 
-public Word(string text, bool isHidden = false )
+    private bool _isHidden;
+
+
+    public Word(string text, bool isHidden = false )
 {
-    this._text = text;
+    _text = text;
+    _isHidden = isHidden;
         
 
 }
-public void Hide()
+
+    public override string ToString()
+    {
+        return _text;
+    }
+    public void Hide()
 {
     if (_isHidden == true)
     {

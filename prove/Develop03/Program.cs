@@ -7,7 +7,8 @@ class Program
     static void Main(string[] args)
     {
         List<string> theGoodBook = new List<string>();
-        theGoodBook = compileScriptures("scriptures.txt");
+        string fullPath = @"C:\Users\jashb\Documents\School\cse210_projects\prove\Develop03\scriptures.txt";
+        theGoodBook = compileScriptures(fullPath);
         Random random = new Random();
         int randomScripture = random.Next(0,theGoodBook.Count);
         (string roughReference, string roughText) = parseScripture(theGoodBook, randomScripture);
@@ -20,6 +21,7 @@ class Program
             scriptureText.Add(Word);          
         }
         Scripture focusScripture = new Scripture(myReference,scriptureText);
+        Console.WriteLine(focusScripture.GetDisplayText());
 
         
         
@@ -42,11 +44,11 @@ class Program
 
 
 
-    public static List<string> compileScriptures(string filename)
+    public static List<string> compileScriptures(string filePath)
     {
         List<string> scriptureMastery = new List<string>();
-        
-        string[] lines = File.ReadAllLines(filename);
+
+        string[] lines = File.ReadAllLines(filePath);
         foreach (string line in lines)
         {
             scriptureMastery.Add(line);
