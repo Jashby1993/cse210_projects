@@ -2,43 +2,47 @@ using System;
 
 class Word
 {
-private string _text;
-
+    private string _text;
+    private string _originalText;
     private bool _isHidden;
 
 
     public Word(string text, bool isHidden = false )
 {
     _text = text;
-    _isHidden = isHidden;
-        
-
+    _originalText = text;
+    _isHidden = isHidden; 
 }
 
-    public override string ToString()
-    {
-        return _text;
-    }
+    
     public void Hide()
-{
-    if (_isHidden == true)
     {
+        _isHidden = true;
         _text = "_____";
+    
     }
-}
-public void Show()
-{
-    if (_isHidden == false)
+    public void Show()
     {
+        _isHidden = false;
+        _text = _originalText;
         
     }
-}
-public bool IsHidden()
-{
-    return false;
-}
-public string GetDisplayText()
-{
-    return "";
-}
+    public bool IsHidden()
+    {
+        return _isHidden;
+    }
+    public string GetDisplayText()
+    {   
+        string displayText;
+        if (_isHidden)
+        {
+        displayText = "_____";
+        }
+        else
+        {
+            displayText = " " + _text;
+        }
+        return displayText;
+    
+    }
 }

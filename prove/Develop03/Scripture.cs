@@ -21,13 +21,15 @@ class Scripture
     //first display
     public string GetDisplayText()
     {
-        string scriptureText = _reference.GetDisplayText();
+        string fullScripture = _reference.GetDisplayText();
+        
 
         foreach (Word word in _words)
         {
-            scriptureText += " " + word.ToString();
+            fullScripture += word.GetDisplayText();
         }
-        return scriptureText;
+        
+        return fullScripture;
     }
     
     
