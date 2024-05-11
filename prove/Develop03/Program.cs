@@ -32,8 +32,27 @@ class Program
         Scripture focusScripture = new Scripture(myReference,scriptureText);
         //Call the full scripture
         Console.WriteLine(focusScripture.GetDisplayText());
-        Console.Write("To start disappearing words, hit the enter key.");
-        Console.ReadLine();
+        Console.WriteLine("To disappear words, hit the enter key.");
+        bool memorized = focusScripture.isCompletelyHidden();
+        
+    
+        while (!memorized)
+        {
+        // Continuously read key presses
+            while (true)
+            {
+                ConsoleKeyInfo keyInfo = Console.ReadKey(true); // Read a single key without displaying it
+                
+                // Check which key was pressed
+                if (keyInfo.Key == ConsoleKey.Enter)
+                {
+                    
+                    int numberToHide = random.Next(1,5);
+                    focusScripture.HideRandomWords(numberToHide); 
+                }
+            }
+        }
+        
 
         
         
