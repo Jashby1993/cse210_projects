@@ -36,24 +36,53 @@ class Scripture
 
     public void HideRandomWords(int numberToHide)
     {
+        //to generate randome numbers
         Random random = new Random();
+        //initializing list of integers to be hidden
         List<int> indicesToHide = new List<int>();
-        while (indicesToHide.Count < numberToHide)
+        //initializing list of possible indices of words to hide, to not get repeat numbers
+        List<int> availableIndices = new List<int>();
+        //populating the possible options of indices
+        for (int i = 0; i < _words.Count; i++)
         {
-            int randomIndex = random.Next(_words.Count);
-            if (!indicesToHide.Contains(randomIndex))
+            if (!_words[i].IsHidden())
             {
-                indicesToHide.Add(randomIndex);
+                availableIndices.Add(i);
             }
         }
-        foreach (int index in indicesToHide)
+        // found the Fisher-Yates shuffle on overstack, and I wanted to see if I could make it work in this program. I kept running into issues
+        // where I couldn't keep track of which words were being removed, so I'm trying it this way
+        int n =availableIndices.Count;
+        while (n>1)
         {
-            if (!_words[index].IsHidden())
-            {
-                _words[index].Hide();
-                _hiddenWordCount++;
-            }
+            n--;
+            int k = random.Next(n+1);
+            int value = availableIndices[k];
+            availableIndices[k] = availableIndices[n];
+            availableIndices[n] = value;
         }
+        for (int i = 0; i < Math.Min(numberToHide, availableIndices.Count); i++)
+        {
+            _words[availableIndices[i]].Hide();
+            _hiddenWordCount++;
+        }
+        //this didn't work, trying something else up there ^^
+       //while (indicesToHide.Count < numberToHide)
+       //{
+       //    int randomIndex = random.Next(_words.Count);
+       //    if (!indicesToHide.Contains(randomIndex))
+       //    {
+       //        indicesToHide.Add(randomIndex);
+       //    }
+       //}
+       //foreach (int index in indicesToHide)
+       //{
+       //    if (!_words[index].IsHidden())
+       //    {
+       //        _words[index].Hide();
+       //        _hiddenWordCount++;
+       //    }
+       //}
 
     }
 

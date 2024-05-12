@@ -49,10 +49,18 @@ class Program
                     
                     int numberToHide = random.Next(1,5);
                     focusScripture.HideRandomWords(numberToHide); 
+                    Console.Clear();
+                    Console.WriteLine(focusScripture.GetDisplayText());
+                    if (focusScripture.isCompletelyHidden())
+                    {
+                        memorized = true;
+                        break;
+                    }
                 }
+
             }
         }
-        
+        Console.WriteLine("Congratulations, you've memorized the scripture");
 
         
         
