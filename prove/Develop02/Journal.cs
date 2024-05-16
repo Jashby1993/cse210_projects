@@ -29,15 +29,10 @@ class Journal
         Console.Write("What is the name of the file? Please exclude the ending (.txt or .csv)");
         string fileName = Console.ReadLine();
         fileName = (fileName + ".txt");
-        using (StreamWriter outputFile = new StreamWriter(fileName))
+        using(StreamWriter outputFile = new StreamWriter (fileName))
         {
-            foreach (Entry entry in Entries)
-            {
-                outputFile.WriteLine(entry.ToString()); // Assuming you have overridden ToString method in Entry class
-            }
+            //this is where I stopped because brain stopped working. Need to tell program to write each entry into a text file. And make sure that prompt, text, and dateTime stay in separate lines.
         }
-
-        Console.WriteLine("Journal saved to file: " + fileName);
     }
 
     public void loadFile()
