@@ -66,23 +66,7 @@ class Scripture
             _words[availableIndices[i]].Hide();
             _hiddenWordCount++;
         }
-        //this didn't work, trying something else up there ^^
-       //while (indicesToHide.Count < numberToHide)
-       //{
-       //    int randomIndex = random.Next(_words.Count);
-       //    if (!indicesToHide.Contains(randomIndex))
-       //    {
-       //        indicesToHide.Add(randomIndex);
-       //    }
-       //}
-       //foreach (int index in indicesToHide)
-       //{
-       //    if (!_words[index].IsHidden())
-       //    {
-       //        _words[index].Hide();
-       //        _hiddenWordCount++;
-       //    }
-       //}
+        
 
     }
 
@@ -97,6 +81,8 @@ class Scripture
             return false;
         }
     }
+
+
     
     
 

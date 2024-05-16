@@ -1,3 +1,4 @@
+//stretch: Having the scripture list pull from txt file. Reads specific key presses to do different things. Enter to hide text. Spacebar to add a new scripture to the list.
 using System;
 using System.Collections.Generic;
 
@@ -10,8 +11,8 @@ class Program
         Console.Clear();
         //pull the list of scriptures
         List<string> theGoodBook = new List<string>();
-        string fullPath = @"C:\Users\jashb\Documents\School\cse210_projects\prove\Develop03\scriptures.txt";
-        theGoodBook = compileScriptures(fullPath);
+        string filePath = @"..\..\..\scriptures.txt";
+        theGoodBook = compileScriptures(filePath);
         //pick a random scripture
         Random random = new Random();
         int randomScripture = random.Next(0,theGoodBook.Count);
@@ -32,7 +33,7 @@ class Program
         Scripture focusScripture = new Scripture(myReference,scriptureText);
         //Call the full scripture
         Console.WriteLine(focusScripture.GetDisplayText());
-        Console.WriteLine("To disappear words, hit the enter key.");
+        Console.WriteLine("To disappear words, hit the enter key.\nTo add a new scripture, hit the spacebar.");
         bool memorized = focusScripture.isCompletelyHidden();
         
     
@@ -51,13 +52,17 @@ class Program
                     focusScripture.HideRandomWords(numberToHide); 
                     Console.Clear();
                     Console.WriteLine(focusScripture.GetDisplayText());
+                    Console.WriteLine("To disappear words, hit the enter key.");
                     if (focusScripture.isCompletelyHidden())
                     {
                         memorized = true;
                         break;
                     }
                 }
-
+                else if (keyInfo.Key == ConsoleKey.Spacebar)
+                {
+                    addToScripture(filePath);
+                }
             }
         }
         Console.WriteLine("Congratulations, you've memorized the scripture");
@@ -103,5 +108,19 @@ class Program
         string text= parts[1];
         
         return (reference, text);
+    }
+
+        public static void addToScripture(string filePath)
+    {
+        string newScripture;
+        Console.WriteLine("Please type in the scripture in the following format: Book Chapter: StartVerse - EndVerse | ScriptureText");
+        newScripture = Console.ReadLine();
+        using (StreamWriter s = File.AppendText(filePath))
+        {
+            
+            s.WriteLine(newScripture);
+
+        }
+        Console.WriteLine("That scripture has been added to the list.");
     }
 }
