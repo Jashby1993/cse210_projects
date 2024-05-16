@@ -5,14 +5,21 @@ class Program
     static void Main(string[] args)
     {
         Journal myJournal = new Journal();
+        PromptGenerator promptGenerator = new PromptGenerator();
         int userSelection = DisplayMenu();
         int menuChoice;
+        string dateTextInstance;
+        string promptInstance;
+
 
         while (userSelection != 5)
         {
             if (userSelection == 1)
-            {
-                myJournal.AddEntry();
+            {  
+                promptInstance = promptGenerator.getRandomPrompt();
+                DateTime currentDateTime = DateTime.Now;
+                dateTextInstance = currentDateTime.ToString("H:mm:ss MMMM dd, yyyy");
+                myJournal.AddEntry(promptInstance,dateTextInstance);
                 userSelection = DisplayMenu();
             }
             else if (userSelection == 2)

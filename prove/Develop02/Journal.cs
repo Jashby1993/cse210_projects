@@ -4,14 +4,16 @@ using System.IO;
 
 class Journal
 {
-    public List<Entry> Entries = new List<Entry>();
-    int menuChoice;
+    private List<Entry> Entries = new List<Entry>();
+    
 
     
 
-    public void AddEntry()
+    public void AddEntry(string prompt, string dateTime)
     {
-        Entry newEntry = new Entry();
+        Console.WriteLine(prompt);
+        string entryText = Console.ReadLine();
+        Entry newEntry = new Entry(prompt, entryText, dateTime);
         Entries.Add(newEntry);
     }
 
@@ -19,7 +21,7 @@ class Journal
     {
         foreach (Entry entry in Entries)
         {
-            Console.WriteLine(entry);
+            entry.Display();
         }
     }
     public void saveToFile()
