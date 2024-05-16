@@ -5,34 +5,59 @@ class Program
     static void Main(string[] args)
     {
         Journal myJournal = new Journal();
-        int userSelection = myJournal.DisplayMenu();
+        int userSelection = DisplayMenu();
+        int menuChoice;
 
         while (userSelection != 5)
         {
             if (userSelection == 1)
             {
                 myJournal.AddEntry();
-                userSelection = myJournal.DisplayMenu();
+                userSelection = DisplayMenu();
             }
             else if (userSelection == 2)
             {
                 myJournal.DisplayAll();
-                userSelection = myJournal.DisplayMenu();
+                userSelection = DisplayMenu();
             }
             else if (userSelection == 3)
             {
                 myJournal.saveToFile();
-                userSelection = myJournal.DisplayMenu();
+                userSelection = DisplayMenu();
             }
             else if (userSelection == 4)
             {
                 myJournal.loadFile();
-                userSelection = myJournal.DisplayMenu();
+                userSelection = DisplayMenu();
             }
 
         }
         Console.WriteLine("Thank you for journaling, see you next time!");
         
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    int DisplayMenu()
+    {
+        string userSelection;
+        Console.WriteLine("What would you like to do? Please enter the number of your choice:");
+        Console.WriteLine("1. Get a prompt and enter a new journal entry.");
+        Console.WriteLine("2. Display the entire journal.");
+        Console.WriteLine("3. Save journal to a file.");
+        Console.WriteLine("4. Load a journal from a file.");
+        Console.WriteLine("5. Quit");
+        userSelection = Console.ReadLine();
+        menuChoice = int.Parse(userSelection);
+        return menuChoice;
+    }
     }
 }
 
