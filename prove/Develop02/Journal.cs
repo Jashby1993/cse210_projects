@@ -24,23 +24,24 @@ class Journal
             entry.Display();
         }
     }
-    public void saveToFile()
+    public void saveToFile(string fileName)
     {
-        Console.Write("What is the name of the file? Please exclude the ending (.txt or .csv)");
-        string fileName = Console.ReadLine();
-        fileName = (fileName + ".txt");
-        using(StreamWriter outputFile = new StreamWriter (fileName))
+        
+        using(StreamWriter newJournal = new StreamWriter (fileName))
         {
-            //this is where I stopped because brain stopped working. Need to tell program to write each entry into a text file. And make sure that prompt, text, and dateTime stay in separate lines.
+            foreach (Entry entry in Entries)
+            {
+                var attributes =entry.giveAttribute();
+                
+                newJournal.WriteLine($"{attributes.prompt}\n{attributes.entry}\n{attributes.dateTime}");
+            }
         }
     }
 
-    public void loadFile()
+    public void loadFile(string fileName)
     {
         //asking for the filename
-        Console.Write("What is the name of the file? It must be a txt file. Please exclude the ending (.txt)");
-        string fileName = Console.ReadLine();
-        fileName = (fileName + ".txt");
+        
 
         List<string> fileContents = new List<string>();
         using (StreamReader reader = new StreamReader(fileName))
