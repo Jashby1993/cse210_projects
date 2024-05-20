@@ -20,22 +20,33 @@ class Activity
     {
         return _duration;
     }
-    public void DisplayStartingMessage()
+    protected int DisplayStartingMessage()
     {
-        int nameChar = _name.Length;
-        int consoleWidth = Console.WindowWidth;
-        string fillRow = new string('-',consoleWidth);
-        string fillSideName = new string('-', ((consoleWidth - nameChar)/2));
-        Console.WriteLine($"{fillSideName}{_name}{fillSideName}");
-        Console.WriteLine(fillRow);
-
-
+        Console.Clear();
+        Console.WriteLine($"You have selected the {_name} activity.\n{_description}\nPlease enter the number of seconds you would like to set aside for this activity: ");
+        int duration = int.Parse(Console.ReadLine());
+        Console.WriteLine("Your activity will start in 10 seconds.");
+        int sideSpace = (Console.WindowWidth-1)/2;
+        string blankSpace = new string(' ',sideSpace);
+        Console.Write(sideSpace);
+        ShowPauseAnimation(10);
+        return duration;
     }
-    public void DisplayEndingMessage()
+    protected void DisplayEndingMessage()
     {
-
+        Console.WriteLine($"Congratulations, you have done {_duration} seconds of the {_name} activity.\nConsistent practice of mindfulness exercises like this one have been shown\nto dramatically increase mental health.");
+        Console.Write("That being said, it can also be helpful to track emotional states over time. Would you like to take just a few more seconds to write down\na few words, like important thoughts or general emotional state after completing the exercise?\nY or N: ");
+        string optForExtra = Console.ReadLine();
+        if (optForExtra == "Y")
+        {
+            ExtraThoughts();
+        }
+        else
+        {
+            Console.WriteLine("That's ok, maybe next time!");
+        }
     }
-    public void ShowPauseAnimation(int duration)
+    protected void ShowPauseAnimation(int duration)
     {
         //pull from pauseanimations csv
         string pauseAnimationsFile = "pauseanimations.csv";
@@ -68,13 +79,9 @@ class Activity
                 i = 0;
             }
         }
-
-
-
-
     }
 
-    public void ShowCountDown(int duration)
+    protected void ShowCountDown(int duration)
     {
        for (int i = duration; i > 0; i--)
        {
@@ -82,5 +89,20 @@ class Activity
         Thread.Sleep(1000);
         Console.Write("\b \b");
        } 
+    }
+
+    protected void ExtraThoughts()
+    {
+        Console.WriteLine("Perfect! Just take a couple seconds to write down... Whatever you want!\nThere is no right or wrong. You could write down some thought that felt important, or just some emotions you are feeling.");
+        string extraThoughts = Console.ReadLine();
+        DateTime now = DateTime.Now;
+        string entryDateTime = now.ToString("MM/dd/yyyy HH:mm");
+        using(StreamWriter mindfulnessJournal = new StreamWriter ("mindfulnessjournal.txt",true))
+        {
+            mindfulnessJournal.WriteLine(_name);
+            mindfulnessJournal.WriteLine(extraThoughts);
+            mindfulnessJournal.WriteLine($"{entryDateTime}");
+            mindfulnessJournal.WriteLine(" ");
+        }
     }
 }   
