@@ -18,6 +18,7 @@ class BreathingActivity : Activity
 
         while (now < end)
         {
+            Console.WriteLine(' ');
             Console.Write($"Breathe IN...");
             ShowCountDown(4);
             Console.WriteLine(' ');
@@ -26,6 +27,8 @@ class BreathingActivity : Activity
             Console.WriteLine(' ');
             Console.Write("And breathe OUT...");
             ShowCountDown(5);
+            Console.WriteLine(' ');
+            now = DateTime.Now;
         }
         DisplayEndingMessage();
         ShowPauseAnimation(10);

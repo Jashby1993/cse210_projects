@@ -14,9 +14,6 @@ class Program
         {
             Console.Clear();
             int userChoice = DisplayMenu();
-            Console.WriteLine("And how long would you like to do this activity? (Enter whole number of SECONDS)");
-            int duration = int.Parse(Console.ReadLine());
-
 
             switch (userChoice)
             {

@@ -25,10 +25,15 @@ class Activity
         Console.Clear();
         Console.WriteLine($"You have selected the {_name} activity.\n{_description}\nPlease enter the number of seconds you would like to set aside for this activity: ");
         int duration = int.Parse(Console.ReadLine());
-        Console.WriteLine("Your activity will start in 10 seconds.");
         int sideSpace = (Console.WindowWidth-1)/2;
         string blankSpace = new string(' ',sideSpace);
-        Console.Write(sideSpace);
+        Console.Write(blankSpace);
+        string dashLine = new string('-',(sideSpace *2 +1));
+        Console.Clear();
+
+        Console.WriteLine("Your activity will start in 10 seconds.");
+        Console.WriteLine(dashLine);
+        Console.Write(blankSpace);   
         ShowPauseAnimation(10);
         return duration;
     }
