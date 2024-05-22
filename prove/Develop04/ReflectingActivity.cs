@@ -77,7 +77,7 @@ class ReflectingActivity : Activity
 
     private void populateQuestionList(List<string>questions)
     {
-          string[] lines = File.ReadAllLines("reflection_questions.txt");
+        string[] lines = File.ReadAllLines("reflection_questions.txt");
         foreach (string line in lines)
         {
             questions.Add(line);
