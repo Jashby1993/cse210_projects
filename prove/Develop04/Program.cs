@@ -15,6 +15,8 @@ class Program
             Console.Clear();
             int userChoice = DisplayMenu();
 
+
+
             switch (userChoice)
             {
                 //breathing exercise
@@ -70,7 +72,7 @@ class Program
 
     static int DisplayMenu()
     {
-        Console.WriteLine("Which mindfulness activity would you like to do now?\n1) Guided Breathing Exercise\n2)Guided reflection\n3)Positivity listing\n4)Review Mindfulness Journal\n5)QUIT");
+        Console.WriteLine("Which mindfulness activity would you like to do now?\n1) Guided Breathing Exercise\n2)Positivity listing\n3)Guided reflection\n4)Review Mindfulness Journal\n5)QUIT");
         int userChoice = int.Parse(Console.ReadLine());
         return userChoice;
     }
