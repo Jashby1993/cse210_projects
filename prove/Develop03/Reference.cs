@@ -18,7 +18,7 @@ class Reference
         int bookEndIndex = 0;
         for (int i=0; i < simpleReference.Length; i++)
         {
-            if (char.IsDigit(simpleReference[i]) && (i != 0 || !char.IsDigit(simpleReference[i - 1])))
+            if (char.IsDigit(simpleReference[i]) && (i == 0 || !char.IsDigit(simpleReference[i - 1])))
             {
                 bookEndIndex = i;
                 break;
