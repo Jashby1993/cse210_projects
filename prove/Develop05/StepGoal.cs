@@ -5,18 +5,18 @@ public class StepGoal : Goal
 {
     int _timesCompleted = 0;
     int _target;
-    int _bonusPoints;
+    int _stepPoints;
     bool _fullyComplete = false;
     string _completedGraphic;
 
-    public StepGoal(string name, string description, int points, int target, int bonusPoints)
+    public StepGoal(string name, string description, int stepPoints, int target, int fullCompletionPoints)
     {
         _goalType = "Step goal";
         _name = name;
         _description = description;
-        _points = points;
+        _stepPoints = points;
         _target = target;
-        _bonusPoints = bonusPoints;
+        _fullCompletionPoints = bonusPoints;
     }
     public override void RecordEvent()
     {

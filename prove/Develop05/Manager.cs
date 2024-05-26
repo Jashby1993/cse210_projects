@@ -3,10 +3,12 @@ using System.Collections.Generic;
 
 public class Manager
 {
-    public int _score;
-    public int _levelNumber;
-    public string _levelName;
-    public List<Goal> goals = new List<Goal>();
+        public List<Goal> goals = new List<Goal>();
+        Level playerLevel = new Level();
+        public int playerPoints = 0;
+        public string fileName;
+
+        
 
 
     public int DisplayMenu()
@@ -22,20 +24,20 @@ public class Manager
     {
         Console.WriteLine("What kind of goal do you want to add?\n1)One time goal (One time completion)\n2)Step Goal (same activity multiple times)\n3)Eternal Goal (Never 'done'.)");
         int goalType = int.Parse(Console.ReadLine());
-        string name;
-        string description;
-        int pointValue;
+        Console.WriteLine("What is a simple name for your goal? ");
+        string name = Console.Readline();
+        Console.WriteLine("Please give a simple but sufficiently detailed description of your goal: ");
+        description = Console.ReadLine();
+        Console.WriteLine("How many points is full completion of this goal worth?");
+        pointValue = int.Parse(Console.ReadLine());
+        
 
 
         switch (goalType)
         {
             
             case 1:
-                Console.WriteLine("What is a simple name for your goal? ");
-                name = Console.ReadLine();
-                Console.WriteLine("Please give a simple but sufficiently detailed description of your goal: ");
-                description = Console.ReadLine();
-                Console.WriteLine("How many points is completion of this goal worth?");
+
                 pointValue = int.Parse(Console.ReadLine());
                 SimpleGoal newSimpleGoal = new SimpleGoal(name, description, pointValue);
                 return newSimpleGoal;
@@ -48,22 +50,20 @@ public class Manager
                 Console.WriteLine("How many times will you do this goal until it is fully completed?");
                 int target = int.Parse(Console.ReadLine());
                 Console.WriteLine("How many points is completion of each step this goal worth?");
-                pointValue = int.Parse(Console.ReadLine());
-                Console.WriteLine("How many bonus points for full completion of this goal worth?");
-                int bonusPoints = int.Parse(Console.ReadLine());
-                StepGoal newStepGoal = new StepGoal(name,description, pointValue,target,bonusPoints);
+                stepPointValue = int.Parse(Console.ReadLine());
+                
+                StepGoal newStepGoal = new StepGoal(name,description, stepPointValue,target,pointValue);
                 return newStepGoal;
             case 3:
-                Console.WriteLine("What is a simple name for your goal? ");
-                name = Console.ReadLine();
-                Console.WriteLine("Please give a simple but sufficiently detailed description of your goal: ");
-                description = Console.ReadLine();
-                Console.WriteLine("How many points is each completion of this goal worth? ");
-                pointValue = int.Parse(Console.ReadLine());
                 EternalGoal newEternalGoal = new EternalGoal(name, description,pointValue);
                 return newEternalGoal;
         }
-    return null;
+        
+    }
+
+    public void RecordEvent()
+    {
+        
     }
     public void Run()
     {
