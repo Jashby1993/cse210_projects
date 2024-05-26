@@ -32,7 +32,7 @@ public class Level
 
     public bool CheckLevelChange(int playerPoints)
     {
-        
+            
         int measureLevel;
         for (int=1,int<=500,int++)
         {
@@ -52,7 +52,21 @@ public class Level
     }
     public Level NewLevel(int playerPoints)
     {
-        
+        int levelNumber;
+        if (playerPoints < 1000)
+        {
+            levelNumber = 1;
+        }
+        else
+        {
+            for (int i =1, i<=500,i++)
+            {
+                if playerPoints >= (i*1000)
+                {
+                    levelNumber = i;
+                }
+            }
+        }
         List<string>beastLines = new List<string>();
         string[] lines = File.ReadAllLines(@'animals.csv');
         foreach (string line in lines)
@@ -69,7 +83,7 @@ public class Level
         }      
         List<string>tierBeasts = new List<string>();
         List<string>tierDescripters = new List<string>();
-        if (_levelNumber<=10)
+        if (levelNumber<=10)
         {
            string[] beasts = beastLines[0].Split(',')
            foreach (string beast in beasts)
@@ -82,7 +96,7 @@ public class Level
             tierDescriptors.Add(descriptor)
            }
         }
-        else if (_levelNumber > 10 && _levelNumber <= 25)
+        else if (levelNumber > 10 && levelNumber <= 25)
         {
             string[] beasts = beastLines[1].Split(',')
             foreach (string beast in beasts)
@@ -113,7 +127,7 @@ public class Level
         int randomDescriptor = random.Next(0, tierDescripters.Count-1)
         string levelBeast = tierBeasts[randomBeast];
         string levelDescriptor = tierDescripters[randomDescriptor];
-        int playerLevel;
-
-    }
+        Level playerLevel = new Level(levelNumber,levelBeast,levelDescriptor)
+        return playerLevel;
+        }
 }
