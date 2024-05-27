@@ -10,6 +10,7 @@ public class EternalGoal : Goal
         _description = description;
         _points = points;
     }
+    
     public override int RecordEvent()
     {
         return _points;

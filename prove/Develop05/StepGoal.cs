@@ -46,7 +46,7 @@ public class StepGoal : Goal
                 totalPoints = _stepPoints;
                 return totalPoints ;
             }
-            else if (_timesCompleted == _target)
+            else
             {
                 Console.WriteLine("Congratulations, you have fully completed your goal, and have earned your completion bonus!");
                 _fullyComplete = true;
