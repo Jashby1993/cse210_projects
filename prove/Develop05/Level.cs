@@ -1,7 +1,7 @@
-//don't know if I'll need this, but it might come in handy
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 
 public class Level
 {
@@ -14,7 +14,7 @@ public class Level
     {
         _levelNumber = levelNumber;
         _beast = beast;
-        _describer = descriptor
+        _describer = descriptor;
     }
     public void SetLevelNumber(int LevelNumber)
     {
@@ -22,7 +22,7 @@ public class Level
     }
     public int GetLevelNumber ()
     {
-        return _levelNumber
+        return _levelNumber;
     }
 
     public string DisplayLevelInfo()
@@ -68,14 +68,14 @@ public class Level
             }
         }
         List<string>beastLines = new List<string>();
-        string[] lines = File.ReadAllLines(@'animals.csv');
+        string[] lines = File.ReadAllLines('@"animals.csv"');
         foreach (string line in lines)
         {
             beastLines.Add(line);
 
         }      
         List<string>descripterLines = new List<string>();
-        string[] lines = File.ReadAllLines(@'descriptors.csv');
+        string[] lines = File.ReadAllLines('@"descriptors.csv"');
         foreach (string line in lines)
         {
             descriptorLines.Add(line);
@@ -88,7 +88,7 @@ public class Level
            string[] beasts = beastLines[0].Split(',')
            foreach (string beast in beasts)
            {
-            tierBeasts.Add(beast)
+            tierBeasts.Add(beast);
            }
             string[] descriptors =descripterLines[0].Split(',')
            foreach (string descriptor in descriptors)

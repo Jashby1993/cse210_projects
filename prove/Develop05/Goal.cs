@@ -7,12 +7,13 @@ public abstract class Goal
     protected string _description;
     protected int _points;
 
-    public abstract void RecordEvent();
+    public abstract int RecordEvent();
+    public abstract Goal ParseGoal(string goalLine);
 
     public virtual string DisplayGoal()
     {
 
-        string goalDisplay = $"[∅] {_name}: {_description}";
+        string goalDisplay = $"[∅]{_goalType}--{_name}:{_description}|{_points}";
         return goalDisplay;
     }
 

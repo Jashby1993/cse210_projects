@@ -63,12 +63,54 @@ public class Manager
 
     public void RecordEvent()
     {
+
+    }
+    public void Save(int playerPoints, string LevelDisplay, List<Goal> GoalList)
+    {
+        Console.WriteLine("What is the filename? Please do NOT include .fileformat at the end, I'll take care of that!\n");
+        string userName = Console.ReadLine();
+        fileName = $"{userName}.txt";
+        string filePath = $"'@'"{fileName}""
+        using (StreamWriter fileSaver = new StreamWriter(filePath,false))
+        {
+            fileSaver.WriteLine(playerPoints);
+            fileSaver.WriteLine(playerLevel.DisplayLevelInfo());
+            foreach (Goal goal in goals)
+            {
+                fileSaver.WriteLine(Goal.DisplayGoal());
+            }
+        }
+        Console.WriteLine("File Saved!");
+
+    }
+    public int playerPoints string playerLevel List<Goal> Load()
+    {
+        Console.Write("What is the filename you would like to load? Exclude .txt at the end. ");
+        string userEntry = Console.ReadLine();
+        fileName = $"{userEntry}.txt";
+        string filePath = $"'@'"{fileName}"";
+        string[] fileInfo = File.ReadAllLines(filePath);
+        int playerPoints = fileInfo[0];
+        string playerLevel = fileInfo[1];
         
+
     }
     public void Run()
     {
         int userChoice = DisplayMenu();
         bool Play = true;
+        List<goals> GoalList = new List<global>();
+        Console.WriteLine("Do you have a save file you would like to load? Y or N ")
+        string userStart=Console.ReadLine()
+        if (userStart == "Y")
+        {
+
+        }
+        else
+        {
+
+        }
+
 
         while (Play)
         {
