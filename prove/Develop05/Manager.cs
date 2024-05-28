@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 public class Manager
 {
         public List<Goal> GoalList = new List<Goal>();
-        public Level playerLevel;
+        public Level playerLevel = new Level();
         public int playerPoints = 0;
         public string fileName;
         public int pointsToAdd;
@@ -19,7 +19,7 @@ public class Manager
     }
     public int DisplayMenu()
     {
-        Console.WriteLine("1) Display User Info\n2) New goal\n3) Record Event\n4) Save\n 5) Load file\n6) QUIT");
+        Console.WriteLine("1) Display User Info\n2) New goal\n3) Record Event\n4) Save\n5) Load file\n6) QUIT");
         int userChoice = int.Parse(Console.ReadLine());
 
         return userChoice;
@@ -47,8 +47,7 @@ public class Manager
         Console.WriteLine("Please give a simple but sufficiently detailed description of your goal: ");
         string description = Console.ReadLine();
         Console.WriteLine("How many points is full completion of this goal worth?");
-        int pointValue = int.Parse(Console.ReadLine());
-        
+        int pointValue = int.Parse(Console.ReadLine());    
 
 
         switch (goalType)
@@ -56,7 +55,6 @@ public class Manager
             
             case 1:
 
-                pointValue = int.Parse(Console.ReadLine());
                 SimpleGoal newSimpleGoal = new SimpleGoal(name, description, pointValue);
                 return newSimpleGoal;
                 
@@ -80,10 +78,7 @@ public class Manager
         
     }
 
-    public void RecordEvent()
-    {
 
-    }
     public void Save(int playerPoints, string LevelDisplay, List<Goal> GoalList)
     {
         Console.WriteLine("What is the filename? Please do NOT include .fileformat at the end, I'll take care of that!\n");
@@ -214,35 +209,12 @@ public class Manager
     }
     public void Run()
     {   
-        string returnUser;
-        
-        int playerPoints = 0;
-        int pointsToAdd = 0;
+
         bool Play = true;
-        List<Goal> GoalList = new List<Goal>();
-        Console.WriteLine("Do you have a save file you would like to load? Y or N ");
-        returnUser = Console.ReadLine();
-        if (returnUser == "Y")
-        {
-            Console.WriteLine("Welcome back! Let's get your information pulled up.");
-            string currentLevelDisplay;
-            
-            (playerPoints,currentLevelDisplay,GoalList)=Load();
-            (int playerLevelInt,string beast,string describer)= ParseLevel(currentLevelDisplay);
-            Level playerLevel = new Level(playerLevelInt,beast,describer);
-            DisplayUserInfo(GoalList);
-        }
-        else
-        {
-            Console.WriteLine("Welcome! Let's get started! First step is to create a save file.");
-            Level playerLevel = new Level();
-            DisplayUserInfo(GoalList);
-        }
-        int userChoice = DisplayMenu();
-
-
         while (Play)
         {
+            int userChoice = DisplayMenu();
+
             switch (userChoice)
             {
                 case 1:
@@ -262,7 +234,7 @@ public class Manager
                     int userGoalChoiceIndex = int.Parse(Console.ReadLine()) - 1;
                     pointsToAdd =GoalList[userGoalChoiceIndex].RecordEvent();
                     AddPointsAnimation(pointsToAdd);
-                    playerPoints =+ pointsToAdd;
+                    playerPoints += pointsToAdd;
                     changeLevelNow =playerLevel.CheckLevelChange(playerPoints);
                     if (changeLevelNow)
                     {
@@ -293,7 +265,11 @@ public class Manager
                     Console.WriteLine("Escape Message");
                     Play = false;
                     break;
+                default:
+                    Console.WriteLine("Not a valid entry, please enter again:");
+                    break;
             }
+            DisplayMenu();
         }
     }
 }

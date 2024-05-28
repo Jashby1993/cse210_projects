@@ -56,36 +56,7 @@ public class StepGoal : Goal
         }
         
     }
-    public override Goal ParseGoal(string goalLine)
-    {
-        bool isComplete = false;
-        int openBracketIndex = goalLine.IndexOf('[');
-        char completionFlag = goalLine[openBracketIndex + 1];
-        if (completionFlag == 'x')
-        {
-            isComplete = true;
-            
-        }
-        else if (completionFlag == ' ')
-        {
-            isComplete = false;
-        }
-        int doubleDashIndex = goalLine.IndexOf("--"); 
-        int colonIndex = goalLine.IndexOf(':');
-        int pipeIndex = goalLine.IndexOf('|');
-        int openParenthesisIndex = goalLine.IndexOf('(');
-        int ofIndex = goalLine.IndexOf("of");
-        int closeParenthesisIndex = goalLine.IndexOf(')');
-        string name = goalLine.Substring(doubleDashIndex+2,colonIndex - doubleDashIndex - 2);
-        string description = goalLine.Substring(colonIndex +1, pipeIndex - colonIndex - 1);
-        int fullCompletePoints = int.Parse(goalLine.Substring(pipeIndex + 1, openParenthesisIndex - pipeIndex - 1));
-        int stepsCompleted = int.Parse(goalLine.Substring(openParenthesisIndex + 1, ofIndex - openParenthesisIndex - 1));
-        int totalSteps = int.Parse(goalLine.Substring(ofIndex + 2, closeParenthesisIndex - ofIndex - 2));
-        int stepPoints = int.Parse(goalLine.Substring(closeParenthesisIndex + 1));
-        StepGoal newGoal = new StepGoal(isComplete,name,description,fullCompletePoints,stepsCompleted,totalSteps,stepPoints);
-        return newGoal;
 
-    }
     public override string DisplayGoal()
     {
         if (_fullyComplete)

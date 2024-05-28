@@ -61,75 +61,54 @@ public class Level
 
         if (playerPoints > 1000)
         {
-            for (int i =1; i<=500;i++)
+            for (int i = 1; i <= 500; i++)
             {
-                if (playerPoints >= (i*1000))
+                if (playerPoints >= (i * 1000))
                 {
                     levelNumber = i;
                 }
             }
         }
-        List<string>beastLines = new List<string>();
-        string[] lines = File.ReadAllLines("@'animals.csv'");
-        foreach (string line in lines)
-        {
-            beastLines.Add(line);
 
-        }      
-        List<string>descriptorLines = new List<string>();
-        string[] descriptors = File.ReadAllLines("@'descriptors.csv");
-        foreach (string line in descriptors)
-        {
-            descriptorLines.Add(line);
+        List<string> beastLines = new List<string>(File.ReadAllLines("animals.csv"));
+        List<string> descriptorLines = new List<string>(File.ReadAllLines("descriptors.csv"));
 
-        }      
-        List<string>tierBeasts = new List<string>();
-        List<string>tierDescripters = new List<string>();
-        if (_levelNumber<=10)
+        List<string> tierBeasts = new List<string>();
+        List<string> tierDescriptors = new List<string>();
+
+        if (levelNumber <= 10)
         {
-           string[] beasts = beastLines[0].Split(',');
-           foreach (string beast in beasts)
-           {
-            tierBeasts.Add(beast);
-           }
-            string[] fullDescripterLine =descriptorLines[0].Split(',');
-           foreach (string descriptor in descriptors)
-           {
-            tierDescripters.Add(descriptor);
-           }
+            string[] beasts = beastLines[0].Split(',');
+            tierBeasts.AddRange(beasts);
+
+            string[] descriptors = descriptorLines[0].Split(',');
+            tierDescriptors.AddRange(descriptors);
         }
-        else if (_levelNumber > 10 && _levelNumber <= 25)
+        else if (levelNumber > 10 && levelNumber <= 25)
         {
             string[] beasts = beastLines[1].Split(',');
-            foreach (string beast in beasts)
-           {
-                tierBeasts.Add(beast);
-           }
-            string[] tier2descriptors =descriptorLines[1].Split(',');
-           foreach (string descriptor in descriptors)
-           {
-            tierDescripters.Add(descriptor);
-            }
+            tierBeasts.AddRange(beasts);
+
+            string[] descriptors = descriptorLines[1].Split(',');
+            tierDescriptors.AddRange(descriptors);
         }
         else
         {
-            string[] beasts = beastLines[1].Split(',');
-            foreach (string beast in beasts)
-            {
-                tierBeasts.Add(beast);
-            }
-            string[] tier3descriptors =descriptorLines[1].Split(',');
-            foreach (string descriptor in descriptors)
-            {
-                tierDescripters.Add(descriptor);
-            }
+            string[] beasts = beastLines[2].Split(',');
+            tierBeasts.AddRange(beasts);
+
+            string[] descriptors = descriptorLines[2].Split(',');
+            tierDescriptors.AddRange(descriptors);
         }
+
         Random random = new Random();
-        int randomBeast = random.Next(0,tierBeasts.Count-1);
-        int randomDescriptor = random.Next(0, tierDescripters.Count-1);
-        string levelBeast = tierBeasts[randomBeast];
-        string levelDescriptor = tierDescripters[randomDescriptor];
-        
-        return (levelNumber,levelBeast,levelDescriptor);
-        }
+        int randomBeastIndex = random.Next(0, tierBeasts.Count);
+        int randomDescriptorIndex = random.Next(0, tierDescriptors.Count);
+
+        string levelBeast = tierBeasts[randomBeastIndex];
+        string levelDescriptor = tierDescriptors[randomDescriptorIndex];
+
+        return (levelNumber, levelBeast, levelDescriptor);
+    }
+
 }

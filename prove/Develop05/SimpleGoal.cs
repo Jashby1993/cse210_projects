@@ -37,29 +37,7 @@ public class SimpleGoal : Goal
             return 0;
         }
     }
-    public override SimpleGoal ParseGoal(string goalLine)
-    {
-        bool isComplete = false;
-        int openBracketIndex = goalLine.IndexOf('[');
-        char completionFlag = goalLine[openBracketIndex + 1];
-        if (completionFlag == 'x')
-        {
-            isComplete = true;
-            
-        }
-        else if (completionFlag == ' ')
-        {
-            isComplete = false;
-        }
-        int doubleDashIndex = goalLine.IndexOf("--"); 
-        int colonIndex = goalLine.IndexOf(':');
-        int pipeIndex = goalLine.IndexOf('|');
-        string name = goalLine.Substring(doubleDashIndex+2,colonIndex - doubleDashIndex - 2);
-        string descriptor = goalLine.Substring(colonIndex +1, pipeIndex - colonIndex - 1);
-        int intPoints = int.Parse(goalLine.Substring(pipeIndex + 1));
-        SimpleGoal newGoal = new SimpleGoal(isComplete,name,descriptor,intPoints);
-        return newGoal;
-    }
+
     public override string DisplayGoal()
     {
     
@@ -71,6 +49,6 @@ public class SimpleGoal : Goal
         {
             _completedGraphic = "[ ]";
         }
-        return $"{_goalType} {_completedGraphic} {_name}: {_description}";
+        return $"{_completedGraphic}{_goalType}--{_name}: {_description}|{_points}";
     }
 }

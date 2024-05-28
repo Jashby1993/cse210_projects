@@ -11,7 +11,7 @@ public abstract class Goal
   
 
     public abstract int RecordEvent();
-    public abstract Goal ParseGoal(string goalLine);
+   
 
     public virtual string DisplayGoal()
     {
