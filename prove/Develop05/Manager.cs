@@ -1,16 +1,22 @@
 using System;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 
 public class Manager
 {
-        public List<Goal> goals = new List<Goal>();
-        Level playerLevel;
+        public List<Goal> GoalList = new List<Goal>();
+        public Level playerLevel;
         public int playerPoints = 0;
         public string fileName;
+        public int pointsToAdd;
+        bool changeLevelNow = false;
 
         
 
-
+    public Manager()
+    {
+        
+    }
     public int DisplayMenu()
     {
         Console.WriteLine("1) Display User Info\n2) New goal\n3) Record Event\n4) Save\n 5) Load file\n6) QUIT");
@@ -19,10 +25,16 @@ public class Manager
         return userChoice;
     }
 
-    public void DisplayUserInfo()
+    public void DisplayUserInfo(List<Goal>GoalList)
     {
+        Console.Clear();
         Console.WriteLine($"Player points: {playerPoints}");
-        Console.WriteLine(Level.Disp)
+        Console.WriteLine(playerLevel.DisplayLevelInfo());
+        foreach (Goal goal in GoalList)
+        {
+            Console.WriteLine(goal.DisplayGoal());
+
+        }
     }
 
 
@@ -83,7 +95,7 @@ public class Manager
         {
             fileSaver.WriteLine(playerPoints);
             fileSaver.WriteLine(LevelDisplay);  // Assuming levelDisplay contains the display info
-            foreach (Goal goal in goals)
+            foreach (Goal goal in GoalList)
             {
                 fileSaver.WriteLine(goal.DisplayGoal());  // Write each goal's info
             }
@@ -98,14 +110,26 @@ public class Manager
         fileName = $"{userEntry}.txt";        
         string[] fileInfo = File.ReadAllLines(fileName);
         int playerPoints = int.Parse(fileInfo[0]);
-        string playerLevel = fileInfo[1];
+        string playerLevelString = fileInfo[1];
+        
         for (int i = 2; i < fileInfo.Count(); i++)
         {
             string goalLine = fileInfo[i];
             Goal newGoal = ParseGoal(goalLine);
             Goals.Add(newGoal);
         }
-        return (playerPoints,playerLevel,Goals);
+        Console.WriteLine("File Loaded!");
+        return (playerPoints,playerLevelString,Goals);
+    }
+    public (int levelNumber,string beast, string describer) ParseLevel(string levelDisplay)
+    {
+        int spaceIndex = levelDisplay.IndexOf(' ');
+        int colonIndex = levelDisplay.IndexOf(':');
+        int dashIndex = levelDisplay.IndexOf('-');
+        int levelNumber = int.Parse(levelDisplay.Substring(spaceIndex + 1, colonIndex- spaceIndex - 1));
+        string beast = levelDisplay.Substring(colonIndex + 1, dashIndex - colonIndex - 1);
+        string describer = levelDisplay.Substring(dashIndex + 1);
+        return (levelNumber,beast,describer);
     }
     public Goal ParseGoal(string goalLine)
     {
@@ -178,22 +202,43 @@ public class Manager
             return null;
         }
     }
+    public void AddPointsAnimation(int pointsToAdd)
+    {
+        for (int i = 0; i<= pointsToAdd; i++)
+        {
+            Console.Clear();
+            Console.WriteLine($"{playerPoints + i}");
+            Thread.Sleep(2);
+            i++;
+        }
+    }
     public void Run()
     {   
-        string userStart;
-        int userChoice = DisplayMenu();
+        string returnUser;
+        
+        int playerPoints = 0;
+        int pointsToAdd = 0;
         bool Play = true;
         List<Goal> GoalList = new List<Goal>();
         Console.WriteLine("Do you have a save file you would like to load? Y or N ");
-        userStart = Console.ReadLine();
-        if (userStart == "Y")
+        returnUser = Console.ReadLine();
+        if (returnUser == "Y")
         {
-
+            Console.WriteLine("Welcome back! Let's get your information pulled up.");
+            string currentLevelDisplay;
+            
+            (playerPoints,currentLevelDisplay,GoalList)=Load();
+            (int playerLevelInt,string beast,string describer)= ParseLevel(currentLevelDisplay);
+            Level playerLevel = new Level(playerLevelInt,beast,describer);
+            DisplayUserInfo(GoalList);
         }
         else
         {
-
+            Console.WriteLine("Welcome! Let's get started! First step is to create a save file.");
+            Level playerLevel = new Level();
+            DisplayUserInfo(GoalList);
         }
+        int userChoice = DisplayMenu();
 
 
         while (Play)
@@ -201,21 +246,48 @@ public class Manager
             switch (userChoice)
             {
                 case 1:
-                    DisplayUserInfo();
+                    DisplayUserInfo(GoalList);
                     break;
                 case 2:
                     Goal newGoal = CreateGoal();
-                    goals.Add(newGoal);
+                    GoalList.Add(newGoal);
                     break;
                 case 3:
-                    RecordEvent();
+                    int i = 1;
+                    foreach (Goal goal in GoalList)
+                    {
+                        Console.WriteLine($"{i}){goal.DisplayGoal()}");
+                        i++;
+                    }
+                    int userGoalChoiceIndex = int.Parse(Console.ReadLine()) - 1;
+                    pointsToAdd =GoalList[userGoalChoiceIndex].RecordEvent();
+                    AddPointsAnimation(pointsToAdd);
+                    playerPoints =+ pointsToAdd;
+                    changeLevelNow =playerLevel.CheckLevelChange(playerPoints);
+                    if (changeLevelNow)
+                    {
+                        int playerLevelInt;
+                        string beast;
+                        string describer;
+                        (playerLevelInt, beast, describer) = playerLevel.NewLevel(playerPoints);
+                        playerLevel = new Level(playerLevelInt,beast,describer);
+                                              
+                    }
+                    Console.Clear();
+                    DisplayUserInfo(GoalList);
                     break;
                 case 4:
                     string levelInfo = playerLevel.DisplayLevelInfo();
-                    Save(playerPoints,levelInfo,goals);
+                    Save(playerPoints,levelInfo,GoalList);
+                    Thread.Sleep(3000);
+                    Console.Clear();
+                    DisplayUserInfo(GoalList);
                     break;
                 case 5:
                     Load();
+                    Thread.Sleep(3000);
+                    Console.Clear();
+                    DisplayUserInfo(GoalList);
                     break;
                 case 6:
                     Console.WriteLine("Escape Message");

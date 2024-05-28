@@ -4,6 +4,8 @@ class Program
 {
     static void Main(string[] args)
     {
-        Console.WriteLine("Hello Develop05 World!");
+        Manager startManager = new Manager();
+        startManager.Run();
+        Console.WriteLine("Goodbye!");
     }
 }

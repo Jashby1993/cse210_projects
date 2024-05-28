@@ -8,10 +8,7 @@ public abstract class Goal
     protected int _points;
     
     
-    protected Goal()
-    {
-        
-    }
+  
 
     public abstract int RecordEvent();
     public abstract Goal ParseGoal(string goalLine);
