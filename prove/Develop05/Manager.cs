@@ -102,8 +102,9 @@ public class Manager
         List<Goal>Goals = new List<Goal>();
         Console.Write("What is the filename you would like to load? Exclude .txt at the end. ");
         string userEntry = Console.ReadLine();
-        fileName = $"{userEntry}.txt";        
-        string[] fileInfo = File.ReadAllLines(fileName);
+        fileName = $"{userEntry}.txt";       
+        string filePath = Path.Combine(Directory.GetCurrentDirectory(), fileName); 
+        string[] fileInfo = File.ReadAllLines(filePath);
         int playerPoints = int.Parse(fileInfo[0]);
         string playerLevelString = fileInfo[1];
         
@@ -256,8 +257,14 @@ public class Manager
                     DisplayUserInfo(GoalList);
                     break;
                 case 5:
-                    Load();
-                    Thread.Sleep(3000);
+                    string levelString;
+                    (playerPoints,levelString,GoalList)=Load();
+                    int levelIntParsed;
+                    string beastParsed;
+                    string describerParsed;
+                    (levelIntParsed,beastParsed,describerParsed)= ParseLevel(levelString);
+                    playerLevel = new Level(levelIntParsed,beastParsed,describerParsed);
+                    Thread.Sleep(2000);
                     Console.Clear();
                     DisplayUserInfo(GoalList);
                     break;
@@ -269,7 +276,7 @@ public class Manager
                     Console.WriteLine("Not a valid entry, please enter again:");
                     break;
             }
-            DisplayMenu();
+            
         }
     }
 }

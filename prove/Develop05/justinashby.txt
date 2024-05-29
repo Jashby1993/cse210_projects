@@ -1,0 +1,5 @@
+3200
+Level 3:Rabbit-Mouth Breather
+[∅]Eternal goal--Read scriptures:read a chapter every day|200
+[x]Simple goal--run a 5k: run a 5k|1500
+[ ]Step goal--go to the gym 5 times:go to the gym five times for at least 30 minutes|300(1of5)1500
