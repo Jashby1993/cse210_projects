@@ -40,10 +40,13 @@ public class Video
             i++;
         }
     }
-
+    public int CommentCounter()
+    {
+        return CommentsSection.Count();
+    }
     public void DisplayFullDetails()
     {
-        int commentsCounter = CommentsSection.Count();
+        int commentsCounter = CommentCounter();
         Console.WriteLine($"Title:{_title}\nAuthor:{_author}\nLength:{_length}\nSummary:{_summary}\nComments Section--{commentsCounter} comments");
         DisplayCommentsSection();
     }
