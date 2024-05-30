@@ -28,6 +28,6 @@ public class Product
     }
     public void ProductLabel()
     {
-        Console.WriteLine($"{_name}:{_id}\n{_quantity} x {_price}");
+        Console.WriteLine($"{_name} : {_id}\n{_quantity} x {_price}");
     }
 }

@@ -5,13 +5,13 @@ public class Order
 {
     //attributes
     private Customer _customer;
-    private List<Product> PackingList;
+    private List<Product> PackingList = new List<Product>();
 
     //constructor
     public Order(Customer customer)
     {
         _customer = customer;
-        List<Product> PackingList = new List<Product>();
+        
     }
 
     //methods
@@ -44,5 +44,13 @@ public class Order
     {
         Console.WriteLine(_customer.GetName());
         _customer.DisplayAddress();        
+    }
+    public void PrintPackingList()
+    {
+        int i = 1;
+        foreach (Product product in PackingList)
+        {   Console.WriteLine($"Item {i}:");
+            product.ProductLabel();
+        }
     }
 }
