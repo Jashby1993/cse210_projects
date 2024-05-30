@@ -44,7 +44,7 @@ public class Video
     public void DisplayFullDetails()
     {
         int commentsCounter = CommentsSection.Count();
-        Console.WriteLine($"Title:{_title}\nAuthor:{_author}\nLength:{_length}\nSummary:{_summary}\nComments Section--{commentsCounter}");
+        Console.WriteLine($"Title:{_title}\nAuthor:{_author}\nLength:{_length}\nSummary:{_summary}\nComments Section--{commentsCounter} comments");
         DisplayCommentsSection();
     }
         public void AddComment(Comment comment)
