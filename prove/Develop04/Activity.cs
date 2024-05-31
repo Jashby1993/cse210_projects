@@ -54,7 +54,8 @@ class Activity
     protected void ShowPauseAnimation(int duration)
     {
         //pull from pauseanimations csv
-        string pauseAnimationsFile = "pauseanimations.csv";
+        
+        string pauseAnimationsFile = @"pauseanimations.csv";
         List<string> animations = new List<string>();
         string[] lines = File.ReadAllLines(pauseAnimationsFile);
         //parse into a strings list

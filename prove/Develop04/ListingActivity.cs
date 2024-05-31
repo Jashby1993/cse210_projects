@@ -1,12 +1,13 @@
 using System;
 using System.Runtime.CompilerServices;
+using System.IO;
 
 class ListingActivity : Activity
 
 { 
     List <string> prompts = new List<string>();
     List<string> userEntry = new List<string>();
-    int _count;
+   
 
     public ListingActivity()
     {_name = "Listing";
@@ -58,7 +59,8 @@ class ListingActivity : Activity
 
     private void populateListingPrompt(List<string> prompts)
     {
-        string[] lines = File.ReadAllLines("listing_prompts.txt");
+        string filePath = @"listing_prompts.txt";
+        string[] lines = File.ReadAllLines(filePath);
         foreach (string line in lines)
         {
             prompts.Add(line);

@@ -66,7 +66,8 @@ class ReflectingActivity : Activity
 
     private void populatePromptList(List<string>prompts)
     {
-        string[] lines = File.ReadAllLines("reflecting_activity_prompts.txt");
+        string filePath = @"reflecting_activity_prompts.txt";
+        string[] lines = File.ReadAllLines(filePath);
         foreach (string line in lines)
         {
             prompts.Add(line);
@@ -77,7 +78,8 @@ class ReflectingActivity : Activity
 
     private void populateQuestionList(List<string>questions)
     {
-        string[] lines = File.ReadAllLines("reflection_questions.txt");
+        string filePath = @"reflection_questions.txt";
+        string[] lines = File.ReadAllLines(filePath);
         foreach (string line in lines)
         {
             questions.Add(line);
