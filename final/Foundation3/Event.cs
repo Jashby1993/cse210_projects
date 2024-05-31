@@ -3,18 +3,24 @@ using System;
 public abstract class Event
 {
     //attributes
-    string _type;
-    string _title;
-    string _description;
-    string _date;
-    string _time;
-    string _address;
+    protected string _type;
+    protected string _title;
+    protected string _description;
+    protected string _date;
+    protected string _time;
+    protected string _address;
 
     //methods
 
-    protected abstract void ShortMessage();
-    protected abstract void StandardMessage();
-    protected abstract void FullMessage();
+    public virtual void ShortMessage()
+    {
+        Console.WriteLine($"Event: {_title}-{_type}\n{_address}");
+    }
+    public virtual void StandardMessage()
+    {
+        Console.WriteLine($"Event: {_title}\n{_description}\nDate:{_date} Time:{_time}\n{_address}");
+    }
+    public abstract void FullMessage();
 
     
 }
